@@ -30,7 +30,9 @@ import {
   MessageCircle,
   Download,
   FileText,
-  Linkedin
+  Linkedin,
+  Eye,
+  Star
 } from 'lucide-react';
 
 // Importar componentes
@@ -38,6 +40,8 @@ import SEOHead from './components/SEOHead';
 import ItchPortfolio from './components/ItchPortfolio';
 import SkillsChart from './components/SkillsChart';
 import ContactForm from './components/ContactForm';
+import UXPortfolio from './components/UXPortfolio';
+import MusicPortfolio from './components/MusicPortfolio';
 
 interface RoleData {
   title: string;
@@ -419,31 +423,6 @@ function App() {
                 <span>Volver</span>
               </motion.button>
             )}
-            
-            {/* Botón CV */}
-            <motion.a
-              href="/cv-nacho-sereno-del-valle.pdf"
-              download
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(0,0,0,0.2)" }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-200"
-            >
-              <Download className="w-4 h-4" />
-              <span>CV PDF</span>
-            </motion.a>
-
-            {/* Botón LinkedIn */}
-            <motion.a
-              href="https://www.linkedin.com/in/nacho-sereno-del-valle/"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(0,123,181,0.3)" }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-200"
-            >
-              <Linkedin className="w-4 h-4" />
-              <span>LinkedIn</span>
-            </motion.a>
           </div>
         </div>
       </motion.header>
@@ -539,18 +518,8 @@ function App() {
                     </motion.div>
                   </div>
                   
-                  {/* Botones de contacto */}
-                  <div className="mt-6 space-y-3">
-                    <motion.a
-                      href="mailto:nachos.delvalle@gmail.com"
-                      whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(59, 130, 246, 0.3)" }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-                    >
-                      <Send className="w-4 h-4" />
-                      <span>Email Directo</span>
-                    </motion.a>
-                    
+                  {/* Botón de contacto */}
+                  <div className="mt-6">
                     <motion.button
                       onClick={() => setShowContactForm(!showContactForm)}
                       whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(16, 185, 129, 0.3)" }}
@@ -558,7 +527,7 @@ function App() {
                       className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                     >
                       <MessageCircle className="w-4 h-4" />
-                      <span>Formulario</span>
+                      <span>Formulario de Contacto</span>
                     </motion.button>
                   </div>
                 </motion.div>
@@ -779,7 +748,7 @@ function App() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Sidebar */}
               <motion.div variants={itemVariants} className="lg:col-span-1 space-y-6">
-                {/* Navigation between profiles - Más llamativo */}
+                {/* Navigation between profiles */}
                 <motion.div 
                   whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
                   className="bg-gray-800 p-6 rounded-2xl shadow-lg transition-all duration-300 border-2 border-gray-600"
@@ -814,7 +783,7 @@ function App() {
                   </div>
                 </motion.div>
 
-                {/* Contact Info */}
+                {/* Contact Info - Sin formulario */}
                 <motion.div 
                   whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
                   className="bg-gray-800 p-6 rounded-2xl shadow-lg transition-all duration-300"
@@ -854,19 +823,23 @@ function App() {
                   </motion.a>
                 </motion.div>
 
-                {/* Portfolio Link - Solo para Game Design */}
-                {currentView === 'game' && roleData[currentView].portfolio && (
+                {/* Portfolio Links */}
+                {(currentView === 'game' || currentView === 'ux' || currentView === 'music') && (
                   <motion.div 
                     whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
                     className="bg-gray-800 p-6 rounded-2xl shadow-lg transition-all duration-300"
                   >
                     <h2 className="text-xl font-bold mb-4 flex items-center">
-                      <div className="w-5 h-5 mr-2 text-orange-500">
-                        <Gamepad2 className="w-full h-full" />
+                      <div className={`w-5 h-5 mr-2 ${currentView === 'game' ? 'text-orange-500' : currentView === 'ux' ? 'text-blue-500' : 'text-purple-500'}`}>
+                        {currentView === 'game' && <Gamepad2 className="w-full h-full" />}
+                        {currentView === 'ux' && <Palette className="w-full h-full" />}
+                        {currentView === 'music' && <Music className="w-full h-full" />}
                       </div>
-                      Portfolio Interactivo
+                      Portfolio
                     </h2>
-                    <ItchPortfolio />
+                    {currentView === 'game' && <ItchPortfolio />}
+                    {currentView === 'ux' && <UXPortfolio />}
+                    {currentView === 'music' && <MusicPortfolio />}
                   </motion.div>
                 )}
               </motion.div>

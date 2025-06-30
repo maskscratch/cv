@@ -15,12 +15,33 @@ const ContactForm: React.FC = () => {
     e.preventDefault();
     setStatus('sending');
     
-    // Simular envío (en producción, aquí iría la lógica real de envío)
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 3000);
-    }, 2000);
+    try {
+      const response = await fetch('https://formspree.io/f/xdkogqpn', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email,
+        }),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
+    } catch (error) {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
