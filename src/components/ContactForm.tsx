@@ -27,6 +27,7 @@ const ContactForm: React.FC = () => {
           subject: formData.subject,
           message: formData.message,
           _replyto: formData.email,
+          _to: 'nachos.management@gmail.com',
         }),
       });
 

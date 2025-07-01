@@ -822,26 +822,6 @@ function App() {
                     <span>Contáctame</span>
                   </motion.a>
                 </motion.div>
-
-                {/* Portfolio Links */}
-                {(currentView === 'game' || currentView === 'ux' || currentView === 'music') && (
-                  <motion.div 
-                    whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
-                    className="bg-gray-800 p-6 rounded-2xl shadow-lg transition-all duration-300"
-                  >
-                    <h2 className="text-xl font-bold mb-4 flex items-center">
-                      <div className={`w-5 h-5 mr-2 ${currentView === 'game' ? 'text-orange-500' : currentView === 'ux' ? 'text-blue-500' : 'text-purple-500'}`}>
-                        {currentView === 'game' && <Gamepad2 className="w-full h-full" />}
-                        {currentView === 'ux' && <Palette className="w-full h-full" />}
-                        {currentView === 'music' && <Music className="w-full h-full" />}
-                      </div>
-                      Portfolio
-                    </h2>
-                    {currentView === 'game' && <ItchPortfolio />}
-                    {currentView === 'ux' && <UXPortfolio />}
-                    {currentView === 'music' && <MusicPortfolio />}
-                  </motion.div>
-                )}
               </motion.div>
 
               {/* Main Content */}
@@ -998,6 +978,26 @@ function App() {
                   </h2>
                   <SkillsChart skills={roleData[currentView].skills} getSkillColor={getSkillColor} />
                 </motion.div>
+
+                {/* Portfolio Section - Moved to main column */}
+                {(currentView === 'game' || currentView === 'ux' || currentView === 'music') && (
+                  <motion.div 
+                    whileHover={{ y: -5, boxShadow: "0 25px 50px rgba(0,0,0,0.4)" }}
+                    className="bg-gray-800 p-8 rounded-2xl shadow-lg transition-all duration-300"
+                  >
+                    <h2 className="text-2xl font-bold mb-6 flex items-center">
+                      <div className={`w-6 h-6 mr-3 ${currentView === 'game' ? 'text-orange-500' : currentView === 'ux' ? 'text-blue-500' : 'text-purple-500'}`}>
+                        {currentView === 'game' && <Gamepad2 className="w-full h-full" />}
+                        {currentView === 'ux' && <Palette className="w-full h-full" />}
+                        {currentView === 'music' && <Music className="w-full h-full" />}
+                      </div>
+                      Portfolio
+                    </h2>
+                    {currentView === 'game' && <ItchPortfolio />}
+                    {currentView === 'ux' && <UXPortfolio />}
+                    {currentView === 'music' && <MusicPortfolio />}
+                  </motion.div>
+                )}
 
                 {/* Complementary Training - Solo mostrar si hay datos */}
                 {roleData[currentView].complementaryTraining.length > 0 && (
