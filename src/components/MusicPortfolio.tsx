@@ -252,60 +252,6 @@ const MusicPortfolio: React.FC = () => {
           </p>
         </motion.div>
       )}
-
-      {/* Servicios Music Business */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="bg-gradient-to-r from-gray-700 to-gray-600 rounded-xl p-6 border border-gray-600"
-      >
-        <h3 className="text-lg font-bold text-white mb-4 flex items-center">
-          <Music className="w-5 h-5 mr-2 text-purple-500" />
-          Servicios Music Business
-        </h3>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-          {[
-            'A&R Management',
-            'Artist Development',
-            'Event Production',
-            'Music Marketing',
-            'Rights Management',
-            'Label Services',
-            'Tour Management',
-            'Digital Strategy'
-          ].map((service, index) => (
-            <motion.div
-              key={service}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 + (index * 0.05) }}
-              className="text-center p-3 bg-gray-800 rounded-lg"
-            >
-              <div className="text-sm font-medium text-white">{service}</div>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="text-center"
-        >
-          <p className="text-gray-300 mb-4">
-            ¿Necesitas impulsar tu carrera musical o gestionar tu proyecto discográfico?
-          </p>
-          <motion.a
-            href="mailto:nachos.delvalle@gmail.com?subject=Consulta Music Business"
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(168, 85, 247, 0.3)" }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-          >
-            <ExternalLink className="w-4 h-4" />
-            <span>Solicitar Consulta</span>
-          </motion.a>
-        </motion.div>
-      </motion.div>
     </div>
   );
 };
